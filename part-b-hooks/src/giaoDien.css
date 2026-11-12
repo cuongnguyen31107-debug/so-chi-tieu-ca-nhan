@@ -1,0 +1,755 @@
+:root {
+  color-scheme: light;
+  --nen: #f1f5fb;
+  --nen-phu: #ffffff;
+  --nen-mem: #f8fafc;
+  --chu: #172033;
+  --chu-mo: #667085;
+  --vien: #e2e8f2;
+  --nhan: #2f6fed;
+  --nhan-dam: #1d4ed8;
+  --nhan-mem: #e8f0ff;
+  --nguy-hiem: #d92d20;
+  --nguy-hiem-mem: #fee4e2;
+  --bong: 0 18px 45px rgba(23, 32, 51, 0.08);
+  --bo-goc: 20px;
+  --mau-an-uong: #f97316;
+  --mau-di-lai: #0ea5e9;
+  --mau-hoc-tap: #7c3aed;
+  --mau-giai-tri: #10b981;
+  --mau-khac: #64748b;
+}
+
+[data-che-do='toi'] {
+  color-scheme: dark;
+  --nen: #070f1f;
+  --nen-phu: #111b2e;
+  --nen-mem: #0c1626;
+  --chu: #e7eefb;
+  --chu-mo: #93a3bd;
+  --vien: #223149;
+  --nhan: #6ea8ff;
+  --nhan-dam: #3b82f6;
+  --nhan-mem: #1a2c4a;
+  --nguy-hiem: #ff8a80;
+  --nguy-hiem-mem: #3a1d24;
+  --bong: 0 18px 45px rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  color: var(--chu);
+  background:
+    radial-gradient(900px 500px at 8% -10%, rgba(47, 111, 237, 0.12), transparent 60%),
+    radial-gradient(700px 420px at 100% 0%, rgba(14, 165, 233, 0.1), transparent 55%),
+    var(--nen);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background: var(--nhan);
+  color: #ffffff;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--nhan);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+.vỏ-ứng-dụng {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 26px 20px 70px;
+}
+
+.thanh-chọn-phần {
+  display: inline-flex;
+  gap: 4px;
+  padding: 5px;
+  margin-bottom: 22px;
+  background: var(--nen-phu);
+  border: 1px solid var(--vien);
+  border-radius: 999px;
+  box-shadow: var(--bong);
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.nút-chọn-phần {
+  border: 0;
+  background: transparent;
+  color: var(--chu-mo);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nút-chọn-phần:hover {
+  color: var(--chu);
+}
+
+.nút-chọn-phần.đang-chọn {
+  background: var(--nhan);
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(47, 111, 237, 0.32);
+}
+
+.đầu-trang {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px 34px;
+  border-radius: 26px;
+  color: #ffffff;
+  background: linear-gradient(125deg, #1e3a8a 0%, #2f6fed 55%, #0ea5e9 100%);
+  box-shadow: 0 24px 60px rgba(29, 78, 216, 0.28);
+}
+
+.đầu-trang::after {
+  content: '';
+  position: absolute;
+  right: -80px;
+  bottom: -120px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.09);
+  pointer-events: none;
+}
+
+[data-che-do='toi'] .đầu-trang {
+  background: linear-gradient(125deg, #0b1a3a 0%, #1d4ed8 60%, #0369a1 100%);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.khối-tiêu-đề {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+}
+
+.đầu-trang h1 {
+  margin-bottom: 8px;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.mô-tả {
+  margin-bottom: 0;
+  max-width: 46ch;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.nhóm-đầu-trang {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.đồng-hồ {
+  display: flex;
+  flex-direction: column;
+  min-width: 196px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.đồng-hồ-giờ {
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.đồng-hồ-ngày {
+  margin-top: 3px;
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: capitalize;
+}
+
+.nút-chuyển-chế-độ {
+  padding: 8px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.nút-chuyển-chế-độ:hover {
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.bố-cục {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+  margin-top: 22px;
+}
+
+.cột-trái {
+  display: grid;
+  gap: 20px;
+}
+
+.thẻ {
+  padding: 22px;
+  border-radius: var(--bo-goc);
+  background: var(--nen-phu);
+  border: 1px solid var(--vien);
+  box-shadow: var(--bong);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.tiêu-đề-thẻ {
+  margin-bottom: 16px;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+
+.biểu-mẫu {
+  display: grid;
+  gap: 14px;
+}
+
+.trường {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.nhãn-trường {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--chu-mo);
+}
+
+.ô-nhập,
+.ô-chọn {
+  width: 100%;
+  padding: 11px 13px;
+  border-radius: 12px;
+  border: 1px solid var(--vien);
+  background: var(--nen-mem);
+  color: var(--chu);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ô-nhập:focus,
+.ô-chọn:focus {
+  border-color: var(--nhan);
+  box-shadow: 0 0 0 4px rgba(47, 111, 237, 0.15);
+}
+
+.ô-nhập[aria-invalid='true'],
+.ô-chọn[aria-invalid='true'] {
+  border-color: var(--nguy-hiem);
+  box-shadow: 0 0 0 4px rgba(217, 45, 32, 0.12);
+}
+
+.hàng-đôi {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.lỗi-trường {
+  margin: 0;
+  font-size: 0.76rem;
+  color: var(--nguy-hiem);
+}
+
+.nút-chính {
+  margin-top: 4px;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2f6fed, #1d4ed8);
+  color: #ffffff;
+  font-size: 0.94rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(47, 111, 237, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease;
+}
+
+.nút-chính:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(47, 111, 237, 0.34);
+}
+
+.nút-chính:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.nút-chính:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.thanh-công-cụ {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.bộ-lọc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.nút-lọc {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--vien);
+  background: var(--nen-mem);
+  color: var(--chu-mo);
+  font-size: 0.81rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.nút-lọc:hover {
+  color: var(--chu);
+  border-color: var(--nhan);
+}
+
+.nút-lọc.đang-lọc {
+  background: var(--nhan);
+  border-color: var(--nhan);
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(47, 111, 237, 0.28);
+}
+
+.chấm-lọc,
+.chấm-loại {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mau-khac);
+}
+
+.chấm-loại {
+  width: 10px;
+  height: 10px;
+}
+
+.ô-tìm-kiếm {
+  flex: 1 1 200px;
+  min-width: 200px;
+  max-width: 280px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--vien);
+  background: var(--nen-mem);
+  color: var(--chu);
+  font-size: 0.86rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ô-tìm-kiếm:focus {
+  border-color: var(--nhan);
+  box-shadow: 0 0 0 4px rgba(47, 111, 237, 0.15);
+}
+
+.an-uong {
+  background: var(--mau-an-uong);
+}
+
+.di-lai {
+  background: var(--mau-di-lai);
+}
+
+.hoc-tap {
+  background: var(--mau-hoc-tap);
+}
+
+.giai-tri {
+  background: var(--mau-giai-tri);
+}
+
+.danh-sách {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dòng-chi {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--vien);
+  background: var(--nen-mem);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease,
+    border-color 0.15s ease;
+}
+
+.dòng-chi:hover {
+  transform: translateX(2px);
+  border-color: var(--nhan);
+  box-shadow: 0 10px 22px rgba(23, 32, 51, 0.07);
+}
+
+.dòng-chi.đang-xóa {
+  opacity: 0.45;
+}
+
+.thông-tin-chi {
+  min-width: 0;
+}
+
+.tên-chi {
+  margin-bottom: 5px;
+  overflow: hidden;
+  color: var(--chu);
+  font-size: 0.94rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chi-tiết-chi {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--chu-mo);
+  font-size: 0.77rem;
+}
+
+.nhãn-loại {
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--nhan-mem);
+  color: var(--nhan);
+  font-size: 0.71rem;
+  font-weight: 600;
+}
+
+.số-tiền {
+  color: var(--chu);
+  font-weight: 700;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.nút-xóa {
+  padding: 7px 11px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--nguy-hiem);
+  font-size: 0.79rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+
+.nút-xóa:hover:not(:disabled) {
+  background: var(--nguy-hiem-mem);
+}
+
+.nút-xóa:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dòng-tổng {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+  padding: 14px 6px 2px;
+  border-top: 1px dashed var(--vien);
+  color: var(--chu-mo);
+  font-size: 0.88rem;
+}
+
+.dòng-tổng strong {
+  color: var(--chu);
+  font-size: 1.06rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.trạng-thái-trống {
+  padding: 48px 20px;
+  border: 1px dashed var(--vien);
+  border-radius: 16px;
+  background: var(--nen-mem);
+  color: var(--chu-mo);
+  text-align: center;
+}
+
+.trạng-thái-trống p {
+  margin-bottom: 6px;
+  color: var(--chu);
+  font-weight: 600;
+}
+
+.trạng-thái-trống span {
+  font-size: 0.82rem;
+}
+
+.thống-kê {
+  margin-top: 0;
+}
+
+.tổng-cộng {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  color: var(--chu-mo);
+  font-size: 0.84rem;
+}
+
+.tổng-cộng strong {
+  color: var(--chu);
+  font-size: 1.14rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.danh-sách-thống-kê {
+  display: grid;
+  gap: 14px;
+}
+
+.dòng-thống-kê {
+  display: grid;
+  gap: 6px;
+}
+
+.nhãn-thống-kê {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--chu-mo);
+  font-size: 0.81rem;
+}
+
+.nhãn-thống-kê span:last-child {
+  color: var(--chu);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.thanh-nền {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--nen-mem);
+}
+
+.thanh-đầy {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.45s ease;
+}
+
+.khung-tải {
+  display: grid;
+  place-items: center;
+  gap: 14px;
+  padding: 52px 20px;
+  color: var(--chu-mo);
+  font-size: 0.88rem;
+}
+
+.vòng-xoay {
+  width: 30px;
+  height: 30px;
+  border: 3px solid var(--vien);
+  border-top-color: var(--nhan);
+  border-radius: 50%;
+  animation: quay 0.8s linear infinite;
+}
+
+@keyframes quay {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.khung-lỗi {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 36px 20px;
+  border: 1px dashed var(--nguy-hiem);
+  border-radius: 16px;
+  background: var(--nguy-hiem-mem);
+  color: var(--nguy-hiem);
+  text-align: center;
+}
+
+.khung-lỗi p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.nút-phụ {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--vien);
+  background: var(--nen-phu);
+  color: var(--chu);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.thông-báo-lỗi {
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--nguy-hiem-mem);
+  color: var(--nguy-hiem);
+  font-size: 0.84rem;
+  font-weight: 500;
+}
+
+.đang-đồng-bộ {
+  margin: 12px 0 0;
+  color: var(--chu-mo);
+  font-size: 0.78rem;
+  text-align: center;
+  animation: nhấp-nháy 1.2s ease-in-out infinite;
+}
+
+@keyframes nhấp-nháy {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@media (max-width: 960px) {
+  .bố-cục {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .vỏ-ứng-dụng {
+    padding: 18px 14px 50px;
+  }
+
+  .đầu-trang {
+    padding: 26px 22px;
+  }
+
+  .nhóm-đầu-trang {
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .đồng-hồ {
+    min-width: 0;
+  }
+
+  .thanh-công-cụ {
+    align-items: stretch;
+  }
+
+  .ô-tìm-kiếm {
+    max-width: none;
+  }
+
+  .dòng-chi {
+    grid-template-columns: 10px minmax(0, 1fr) auto;
+    row-gap: 8px;
+  }
+
+  .thông-tin-chi {
+    grid-column: 2 / 4;
+  }
+
+  .số-tiền {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .nút-xóa {
+    grid-column: 3;
+    grid-row: 2;
+  }
+}
+
+@media (max-width: 420px) {
+  .hàng-đôi {
+    grid-template-columns: 1fr;
+  }
+
+  .thanh-chọn-phần {
+    width: 100%;
+  }
+
+  .nút-chọn-phần {
+    flex: 1;
+    text-align: center;
+  }
+}
